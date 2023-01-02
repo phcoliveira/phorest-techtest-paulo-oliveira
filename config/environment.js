@@ -17,6 +17,16 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    apiURL: 'https://api-gateway-dev.phorest.com',
+
+    defaultCredentials: {
+      username: 'global/cloud@apiexamples.com',
+      password: 'VMlRo/eh+Xd8M~l',
+    },
+
+    defaultBusinessId: 'eTC3QY5W3p_HmGHezKfxJw',
+    defaultBranchId: 'SE-J0emUgQnya14mOGdQSw',
   };
 
   if (environment === 'development') {
