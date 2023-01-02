@@ -1,14 +1,20 @@
 <div data-test-page-client-index='root'>
-  {{#each @clients as |client|}}
-    <div
-      data-test-page-client-index='client'
-      data-test-client-id={{client.clientId}}
-    >
-      <p>{{client.clientId}}</p>
-    </div>
-  {{else}}
-    <div data-test-page-client-index='no-client'>
-      <p>No clients found</p>
-    </div>
-  {{/each}}
+  <div class='flex flex-col gap-2'>
+    {{#each @clients as |client|}}
+      <LinkTo
+        @route='client.show'
+        @model={{client}}
+        class='listing listing-interactive'
+        data-test-page-client-index='client'
+        data-test-client-id={{client.clientId}}
+      >
+        {{client.firstName}}
+        {{client.lastName}}
+      </LinkTo>
+    {{else}}
+      <div data-test-page-client-index='no-client'>
+        <p>No clients found</p>
+      </div>
+    {{/each}}
+  </div>
 </div>

@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-stone-100 text-stone-800;
+  }
+}
+
+@layer components {
+  .listing {
+    @apply bg-white border border-white p-4 shadow focus:outline-none;
+  }
+
+  .listing-interactive {
+    @apply hover:border-stone-400 hover:shadow-md focus:border-stone-800 focus:shadow-lg;
+  }
+}
+
 :root {
   display: grid;
   height: 100vh;
