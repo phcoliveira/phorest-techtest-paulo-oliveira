@@ -1,0 +1,14 @@
+<div data-test-page-client-index='root'>
+  {{#each @clients as |client|}}
+    <div
+      data-test-page-client-index='client'
+      data-test-client-id={{client.clientId}}
+    >
+      <p>{{client.clientId}}</p>
+    </div>
+  {{else}}
+    <div data-test-page-client-index='no-client'>
+      <p>No clients found</p>
+    </div>
+  {{/each}}
+</div>
