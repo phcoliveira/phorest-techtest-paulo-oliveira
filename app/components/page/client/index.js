@@ -8,7 +8,8 @@ export default class PageClientIndexComponent extends Component {
    * args:
    * - clients: Client[]
    * - page: Page
-   * - onPaginate: (pageNumber: number) => unknown
+   * - onPaginate?: (pageNumber: number) => unknown
+   * - onSearch?: (searchTerm: string) => unknown
    */
 
   get currentPageNumber() {
@@ -37,11 +38,16 @@ export default class PageClientIndexComponent extends Component {
 
   @action
   goBack() {
-    this.args.onPaginate(this.currentPageNumber - 1);
+    this.args.onPaginate?.(this.currentPageNumber - 1);
   }
 
   @action
   goForward() {
-    this.args.onPaginate(this.currentPageNumber + 1);
+    this.args.onPaginate?.(this.currentPageNumber + 1);
+  }
+
+  @action
+  search(event) {
+    this.args.onSearch?.(event.target.value);
   }
 }

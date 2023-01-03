@@ -9,6 +9,8 @@ export class PageClientIndexPageObject extends PageObject {
     super(elementName ?? dataTestFor('root'));
   }
 
+  search = selector(dataTestFor('search'));
+
   clients = selector(dataTestFor('client'));
 
   noClient = selector(dataTestFor('no-client'));

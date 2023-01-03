@@ -38,6 +38,14 @@
       disabled:text-gray-700
       disabled:bg-transparent;
   }
+
+  .input {
+    @apply
+      bg-white
+      p-4
+      block
+      w-full;
+  }
 }
 
 :root {

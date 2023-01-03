@@ -1,4 +1,4 @@
-import { click, render } from '@ember/test-helpers';
+import { click, fillIn, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'phorest-techtest-paulo-oliveira/tests/helpers';
 import { PageClientIndexPageObject } from 'phorest-techtest-paulo-oliveira/tests/page-objects';
@@ -13,6 +13,7 @@ module('Integration | Component | page/client/index', function (hooks) {
     this.args = {
       clients: [{ clientId: '1' }, { clientId: '2' }],
       onPaginate: function () {},
+      onSearch: function () {},
       page: {
         number: 0,
         totalPages: 1,
@@ -24,7 +25,6 @@ module('Integration | Component | page/client/index', function (hooks) {
     await render(hbs`
       <Page::Client::Index
         @clients={{this.args.clients}}
-        @onPaginate={{this.args.onPaginate}}
         @page={{this.args.page}}
         data-splat
       />
@@ -37,7 +37,6 @@ module('Integration | Component | page/client/index', function (hooks) {
     await render(hbs`
       <Page::Client::Index
         @clients={{this.args.clients}}
-        @onPaginate={{this.args.onPaginate}}
         @page={{this.args.page}}
       >
         <div id="dynamic-content"></div>
@@ -51,7 +50,6 @@ module('Integration | Component | page/client/index', function (hooks) {
     await render(hbs`
       <Page::Client::Index
         @clients={{this.args.clients}}
-        @onPaginate={{this.args.onPaginate}}
         @page={{this.args.page}}
       />
     `);
@@ -72,7 +70,6 @@ module('Integration | Component | page/client/index', function (hooks) {
     await render(hbs`
       <Page::Client::Index
         @clients={{this.args.clients}}
-        @onPaginate={{this.args.onPaginate}}
         @page={{this.args.page}}
       />
     `);
@@ -118,5 +115,23 @@ module('Integration | Component | page/client/index', function (hooks) {
     await click(pageObject.goForward.element);
 
     assert.verifySteps(['0', '2']);
+  });
+
+  test('it shows a search input', async function (assert) {
+    this.args.onSearch = function (searchTerm) {
+      assert.step(searchTerm);
+    };
+
+    await render(hbs`
+      <Page::Client::Index
+        @clients={{this.args.clients}}
+        @onSearch={{this.args.onSearch}}
+        @page={{this.args.page}}
+      />
+    `);
+
+    await fillIn(pageObject.search.element, 'foobar');
+
+    assert.verifySteps(['foobar']);
   });
 });

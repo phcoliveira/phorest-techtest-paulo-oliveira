@@ -1,4 +1,14 @@
 <div data-test-page-client-index='root'>
+  <div class='my-8'>
+    <Input
+      @type='search'
+      class='input'
+      placeholder='Search by email or phone'
+      data-test-page-client-index='search'
+      {{on 'change' this.search}}
+    />
+  </div>
+
   <div class='flex flex-col gap-2'>
     {{#each @clients as |client|}}
       <LinkTo
