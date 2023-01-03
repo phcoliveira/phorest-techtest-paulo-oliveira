@@ -2,14 +2,21 @@
   <Input
     @type='number'
     class='input mb-8'
+    disabled={{this._createVoucher.isRunning}}
+    aria-label='Enter the amount for a new voucher'
     placeholder='Enter the amount for a new voucher'
     data-test-voucher-manager='new-voucher'
+    {{on 'change' this.createVoucher}}
   />
 
   <div class='flex flex-col gap-2'>
     {{#let this.getVouchers.lastSuccessful.value as |vouchers|}}
       {{#each vouchers as |voucher|}}
-        <div class='listing' data-test-voucher-manager='voucher'>
+        <div
+          class='listing'
+          data-test-voucher-manager='voucher'
+          data-test-voucher-id={{voucher.voucherId}}
+        >
           <p>voucher id: {{voucher.voucherId}}</p>
           <p>remaining balance: {{voucher.remainingBalance}}</p>
         </div>
