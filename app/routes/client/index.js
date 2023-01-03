@@ -32,7 +32,7 @@ export default class ClientIndexRoute extends Route {
     const payload = await response.json();
 
     return {
-      clients: payload._embedded.clients,
+      clients: payload._embedded?.clients ?? [],
       page: payload.page,
     };
   }
