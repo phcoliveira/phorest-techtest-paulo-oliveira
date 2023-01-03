@@ -1,5 +1,7 @@
 {{page-title 'Index'}}
 
+{{! I didn't know about this until it was too late}}
+{{! template-lint-disable no-index-component-invocation}}
 <Page::Client::Index
   @clients={{this.model.clients}}
   @onPaginate={{this.paginate}}
