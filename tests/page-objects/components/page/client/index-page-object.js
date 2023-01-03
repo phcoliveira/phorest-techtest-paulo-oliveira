@@ -12,4 +12,12 @@ export class PageClientIndexPageObject extends PageObject {
   clients = selector(dataTestFor('client'));
 
   noClient = selector(dataTestFor('no-client'));
+
+  pagination = selector(dataTestFor('pagination'));
+
+  goBack = selector(dataTestFor('go-back'));
+
+  currentPage = selector(dataTestFor('current-page'));
+
+  goForward = selector(dataTestFor('go-forward'));
 }

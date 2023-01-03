@@ -10,11 +10,33 @@
 
 @layer components {
   .listing {
-    @apply bg-white border border-white p-4 shadow focus:outline-none;
+    @apply
+      bg-white border
+      border-white
+      p-4
+      shadow
+      focus:outline-none;
   }
 
   .listing-interactive {
-    @apply hover:border-stone-400 hover:shadow-md focus:border-stone-800 focus:shadow-lg;
+    @apply
+      hover:border-stone-400
+      hover:shadow-md
+      focus:border-stone-800
+      focus:shadow-lg;
+  }
+
+  .flat-button {
+    @apply
+      bg-transparent
+      p-4
+      font-semibold
+      text-sky-700
+      hover:bg-black/5
+      focus:bg-black/10
+      focus:outline-none
+      disabled:text-gray-700
+      disabled:bg-transparent;
   }
 }
 

@@ -17,4 +17,38 @@
       </div>
     {{/each}}
   </div>
+
+  {{#if this.canPaginate}}
+    <div
+      class='grid grid-cols-3 gap-4 p-4 place-content-center w-max mx-auto'
+      data-test-page-client-index='pagination'
+    >
+      <button
+        type='button'
+        class='flat-button'
+        disabled={{not this.canPaginateBack}}
+        data-test-page-client-index='go-back'
+        {{on 'click' this.goBack}}
+      >
+        Back
+      </button>
+
+      <span
+        class='font-semibold grid place-content-center'
+        data-test-page-client-index='current-page'
+      >
+        {{this.currentPageNumberForDisplay}}
+      </span>
+
+      <button
+        type='button'
+        class='flat-button'
+        disabled={{not this.canPaginateForward}}
+        data-test-page-client-index='go-forward'
+        {{on 'click' this.goForward}}
+      >
+        Next
+      </button>
+    </div>
+  {{/if}}
 </div>
