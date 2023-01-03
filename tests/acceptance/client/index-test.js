@@ -26,7 +26,6 @@ module('Acceptance | client/index', function (hooks) {
 
     await visit('client');
 
-    console.log({ url: currentURL() });
     url = new URL(currentURL(), base);
     assert.notOk(url.searchParams.has('page'));
 
