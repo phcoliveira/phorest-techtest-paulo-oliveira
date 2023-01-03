@@ -1,4 +1,4 @@
-import { fillIn, render, waitFor } from '@ember/test-helpers';
+import { fillIn, render, waitFor, waitUntil } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'phorest-techtest-paulo-oliveira/tests/helpers';
 import { VoucherManagerPageObject } from 'phorest-techtest-paulo-oliveira/tests/page-objects';
@@ -65,11 +65,14 @@ module('Integration | Component | voucher-manager', function (hooks) {
       'data-test-voucher-id'
     );
     await fillIn(pageObject.newVoucher.element, '555.55');
-    const newFirstVoucherId = pageObject.vouchers[0].element.getAttribute(
-      'data-test-voucher-id'
-    );
+    await waitUntil(() => {
+      const newFirstVoucherId = pageObject.vouchers[0].element.getAttribute(
+        'data-test-voucher-id'
+      );
 
-    assert.notStrictEqual(firstVoucherId, newFirstVoucherId);
+      return firstVoucherId !== newFirstVoucherId;
+    });
+
     assert.dom(pageObject.vouchers[0].element).containsText('555.55');
   });
 });
