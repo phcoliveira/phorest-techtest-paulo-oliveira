@@ -4,13 +4,22 @@ import basicCredentials from 'phorest-techtest-paulo-oliveira/utils/basic-creden
 
 export default class ApiClientService extends Service {
   async searchClients(options = {}) {
+    const { email, page, phone } = options;
     const url = new URL(
       `/third-party-api-server/api/business/${ENV.defaultBusinessId}/client`,
       ENV.apiURL
     );
 
     url.searchParams.append('size', '10');
-    url.searchParams.append('page', options.page);
+    url.searchParams.append('page', page);
+
+    if (email) {
+      url.searchParams.append('email', email);
+    }
+
+    if (phone) {
+      url.searchParams.append('phone', phone);
+    }
 
     const { password, username } = ENV.defaultCredentials;
 

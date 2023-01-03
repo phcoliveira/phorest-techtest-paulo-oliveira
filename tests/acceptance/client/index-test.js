@@ -2,6 +2,7 @@ import {
   click,
   currentRouteName,
   currentURL,
+  fillIn,
   visit,
 } from '@ember/test-helpers';
 import { setupApplicationTest } from 'phorest-techtest-paulo-oliveira/tests/helpers';
@@ -13,15 +14,15 @@ const pageObject = new ClientIndexPageObject();
 module('Acceptance | client/index', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('visiting /client', async function (assert) {
+  const base = 'http://foo.bar';
+
+  test('it can be visited', async function (assert) {
     await visit('/client');
 
     assert.strictEqual(currentRouteName(), 'client.index');
-    assert.dom(pageObject.mainContent.element).isVisible();
   });
 
   test('clients can be paginated', async function (assert) {
-    const base = 'http://foo.bar';
     let url;
 
     await visit('client');
@@ -38,5 +39,29 @@ module('Acceptance | client/index', function (hooks) {
 
     url = new URL(currentURL(), base);
     assert.notOk(url.searchParams.has('page'));
+  });
+
+  test('clients can be searched by email or phone', async function (assert) {
+    const email = 'test@test.com';
+    const phone = '353873691589';
+    let url;
+
+    await visit('client');
+
+    url = new URL(currentURL(), base);
+    assert.notOk(url.searchParams.has('email'));
+    assert.notOk(url.searchParams.has('phone'));
+
+    await fillIn(pageObject.mainContent.search.element, email);
+
+    url = new URL(currentURL(), base);
+    assert.strictEqual(url.searchParams.get('email'), email);
+    assert.notOk(url.searchParams.has('phone'));
+
+    await fillIn(pageObject.mainContent.search.element, phone);
+
+    url = new URL(currentURL(), base);
+    assert.notOk(url.searchParams.has('email'));
+    assert.strictEqual(url.searchParams.get('phone'), phone);
   });
 });

@@ -6,16 +6,26 @@ export default class ClientIndexRoute extends Route {
   apiClientService;
 
   queryParams = {
+    email: {
+      refreshModel: true,
+      replace: true,
+    },
     pageNumber: {
       refreshModel: true,
       replace: false,
     },
+    phone: {
+      refreshModel: true,
+      replace: true,
+    },
   };
 
   async model(params) {
-    const { pageNumber } = params;
+    const { email, pageNumber, phone } = params;
     const options = {
+      email,
       page: pageNumber.toString(),
+      phone,
     };
 
     const response = await this.apiClientService.searchClients(options);
