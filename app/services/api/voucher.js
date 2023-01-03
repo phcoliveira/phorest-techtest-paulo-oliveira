@@ -27,4 +27,24 @@ export default class ApiVoucherService extends Service {
       method: 'GET',
     });
   }
+
+  async createVoucher(voucher) {
+    const url = new URL(
+      `/third-party-api-server/api/business/${ENV.defaultBusinessId}/voucher`,
+      ENV.apiURL
+    );
+
+    const { password, username } = ENV.defaultCredentials;
+
+    return await fetch(url, {
+      body: JSON.stringify(voucher),
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Basic ${basicCredentials(username, password)}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+    });
+  }
 }
